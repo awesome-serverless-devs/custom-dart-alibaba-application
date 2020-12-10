@@ -1,0 +1,26 @@
+MyFunctionDemo:
+  Component: fc
+  Provider: alibaba
+  Extends:
+    deploy:
+      - Hook: make build
+        Path: ./
+        Pre: true
+  Properties:
+    Region: cn-hangzhou
+    Service:
+      Name: custom-runtime-demo
+    Function:
+      Name: custom-dart
+      CodeUri:
+        Src: ./code
+        Excludes:
+          - code/index.dart
+          - .s
+          - template.yaml
+          - README.md
+      CAPort: 9000
+      Handler: index.handler
+      MemorySize: 1024
+      Runtime: custom
+      Timeout: 60
